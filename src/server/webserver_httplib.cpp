@@ -138,7 +138,12 @@ int WebServer::start_web_server_multi(listener_args *args) {
 
     if (req.has_header("SubConverter-Request")) {
       res.status = 500;
-      res.set_content("Loop request detected!", "text/plain");
+      res.set_content("Internal error: loop request detected.\n"
+                      "内部错误：检测到循环请求。\n"
+                      "Please check subscription URLs and proxy settings to "
+                      "avoid routing the service back to itself.\n"
+                      "请检查订阅链接和代理设置，避免服务请求回到自身。",
+                      "text/plain");
       return httplib::Server::HandlerResponse::Handled;
     }
     res.set_header("Server", "subconverter/" VERSION " cURL/" LIBCURL_VERSION);
