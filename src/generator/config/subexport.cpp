@@ -3323,7 +3323,8 @@ void proxyToSingBox(std::vector<Proxy> &nodes, rapidjson::Document &json,
       proxy.AddMember("inet4_bind_address",
                       rapidjson::StringRef(x.SelfIP.c_str()), allocator);
       rapidjson::Value addresses(rapidjson::kArrayType);
-      addresses.PushBack(rapidjson::StringRef(x.SelfIP.append("/32").c_str()),
+      std::string local_address = x.SelfIP + "/32";
+      addresses.PushBack(rapidjson::Value(local_address.c_str(), allocator),
                          allocator);
       //                if (!x.SelfIPv6.empty())
       //                    addresses.PushBack(rapidjson::StringRef(x.SelfIPv6.c_str()),
