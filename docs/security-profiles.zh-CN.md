@@ -11,12 +11,6 @@
 profile=public
 ```
 
-或使用环境变量：
-
-```bash
-SUBCONVERTER_SECURITY_PROFILE=public
-```
-
 ## 三个档位
 
 - `lan`：默认值，兼容旧行为。公开请求、外部配置、规则集、订阅链接仍可访问本地、私有网段和 fake-ip 资源。
@@ -37,11 +31,7 @@ profile=public
 allow_public_upload=true
 ```
 
-也可以使用：
-
-```bash
-SUBCONVERTER_ALLOW_PUBLIC_UPLOAD=true
-```
+安全档位与上传开关只从配置文件读取，避免部署环境变量意外覆盖安全策略。
 
 `strict` 下即使设置 `allow_public_upload=true` 也不会允许公开上传。
 
